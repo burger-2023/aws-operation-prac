@@ -12,7 +12,7 @@ class CartController(
 ) {
 
     /**
-     * POST -  제품을 장바구니에 추가합니다.
+     * POST - 제품을 장바구니에 추가합니다.
      * */
     @PostMapping("/register")
     fun addToCart(
@@ -26,7 +26,7 @@ class CartController(
     }
 
     /**
-     * GET -  모든 장바구니 항목을 검색합니다.
+     * GET - 모든 장바구니 항목을 검색합니다.
      * */
     @GetMapping
     fun getAllCarts(

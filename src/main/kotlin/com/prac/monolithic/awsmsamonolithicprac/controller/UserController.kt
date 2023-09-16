@@ -13,7 +13,7 @@ class UserController(
 ) {
 
     /**
-     * 새로운 사용자를 등록합니다. Request body에는 email, name, password가 포함되어야 합니다.
+     * POST - 새로운 사용자를 등록합니다. Request body 에는 email, name, password 가 포함되어야 합니다.
      * */
     @PostMapping("/register")
     fun registerUser(
@@ -25,7 +25,7 @@ class UserController(
     }
 
     /**
-     * 사용자 로그인을 수행합니다. Request body에는 email과 password가 포함되어야 합니다.
+     * POST - 사용자 로그인을 수행합니다. Request body 에는 email 과 password 가 포함되어야 합니다.
      * */
     @PostMapping("/login")
     fun loginUser(
@@ -37,7 +37,7 @@ class UserController(
     }
 
     /**
-     * 주어진 ID를 가진 사용자 정보를 검색합니다.
+     * GET - 주어진 ID로 가진 사용자 정보를 검색합니다.
      * */
     @GetMapping("/{userId}")
     fun getUser(

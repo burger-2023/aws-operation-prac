@@ -12,7 +12,7 @@ class ProductController(
 ) {
 
     /**
-     * POST - 새 제품을 추가합니다. Request body에는 name, description, price가 포함되어야 합니다.
+     * POST - 새 제품을 추가합니다. Request body 에는 name, description, price 가 포함되어야 합니다.
      * */
     @PostMapping("/register")
     fun addProduct(
