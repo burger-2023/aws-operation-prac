@@ -20,6 +20,7 @@ class CartService(
         val user = userRepository.findById(userId).orElseThrow { Exception("User not found") } // 유저 정보 조회
 
         val cartItem = CartItem(product = product, quantity = quantity, user = user)
+        cartItem.productName = product.name
 
         return cartRepository.save(cartItem)
     }
