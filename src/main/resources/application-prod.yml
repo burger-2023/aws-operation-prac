@@ -1,0 +1,15 @@
+server:
+  port: 80
+
+spring:
+
+  datasource:
+    url: jdbc:postgresql://hostname:port/dbname
+    driverClassName: org.postgresql.Driver
+    username: your_username
+    password: your_password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

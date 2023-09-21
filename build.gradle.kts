@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "com.prac.monolithic"
-version = "0.0.1-SNAPSHOT"
+version = "0.1"
 
 noArg {
     annotation("jakarta.persistence.Entity")
