@@ -18,4 +18,9 @@ class GlobalExceptionHandler {
     fun handleInvalidCredentialsException(ex: InvalidCredentialsException, response: HttpServletResponse): ResponseEntity<String> {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.message)
     }
+
+    @ExceptionHandler(UserAlreadyExistsException::class)
+    fun handleInvalidCredentialsException(ex: UserAlreadyExistsException, response: HttpServletResponse): ResponseEntity<String> {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.message)
+    }
 }

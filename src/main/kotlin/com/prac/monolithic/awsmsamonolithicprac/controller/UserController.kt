@@ -47,4 +47,11 @@ class UserController(
 
         return ResponseEntity.ok(user)
     }
+
+    @GetMapping("/testRdsProxyPerformance")
+    fun testRdsProxyPerformance(): ResponseEntity<Boolean> {
+        userService.testRdsProxyPerformance()
+
+        return ResponseEntity.ok(true)
+    }
 }

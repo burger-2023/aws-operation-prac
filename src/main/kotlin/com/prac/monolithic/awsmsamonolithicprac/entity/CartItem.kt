@@ -26,5 +26,8 @@ data class CartItem(
 
     @Transient
     var productName: String? = null
+<<<<<<< HEAD
 
+=======
+>>>>>>> 94449bd22f99e020fcb107cbd011c70fb9f57da1
 }
