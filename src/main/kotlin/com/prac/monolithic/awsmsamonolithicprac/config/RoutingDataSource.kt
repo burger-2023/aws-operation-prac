@@ -11,7 +11,6 @@ class RoutingDataSource : AbstractRoutingDataSource() {
     private val log: Logger = LoggerFactory.getLogger(this.javaClass)
 
     override fun determineCurrentLookupKey(): Any = TransactionSynchronizationManager.isCurrentTransactionReadOnly().run {
-        log.info("[isCurrentTransactionReadOnly = $this]")
         if (this) "reader" else "writer"
     }
 
