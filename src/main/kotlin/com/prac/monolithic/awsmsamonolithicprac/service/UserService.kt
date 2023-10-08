@@ -26,7 +26,7 @@ class UserService(
     }
 
     @Transactional
-    fun registerUserImage(image: MultipartFile, userId: Long) {
+    fun registerUserImage(image: MultipartFile, userId: Long): String {
         // 이미지 키값 생성
         val key = "user/$userId/${image.originalFilename?.replace(" ", "_")}"
 
@@ -35,6 +35,8 @@ class UserService(
 
         // imageUrl 저장
         userRepository.updateUserImageUrl(userId, imageUrl)
+
+        return imageUrl
     }
 
 

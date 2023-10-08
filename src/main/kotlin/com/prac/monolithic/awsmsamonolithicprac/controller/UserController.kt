@@ -29,8 +29,10 @@ class UserController(
     fun registerUserImage(
         @RequestParam image: MultipartFile,
         @PathVariable userId: Long
-    ) {
-        userService.registerUserImage(image, userId)
+    ): ResponseEntity<String> {
+        val imageUrl = userService.registerUserImage(image, userId)
+
+        return ResponseEntity.ok(imageUrl)
     }
 
     /**
