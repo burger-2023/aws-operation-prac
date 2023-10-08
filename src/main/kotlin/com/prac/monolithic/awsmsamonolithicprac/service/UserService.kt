@@ -40,7 +40,8 @@ class UserService(
 
     @Transactional(readOnly = true)
     fun findByEmail(credentials: Credentials): User {
-        val user = userRepository.findByEmail(credentials.email) ?: throw UserNotFoundException("User not found with email: ${credentials.email}")
+        val user = userRepository.findByEmail(credentials.email)
+            ?: throw UserNotFoundException("User not found with email: ${credentials.email}")
         if (user.password != credentials.password) throw InvalidCredentialsException("Invalid credentials")
 
         return user
@@ -54,8 +55,8 @@ class UserService(
     @Transactional
     fun deleteUserImage(userId: Long) {
         val user = findById(userId)
-        s3Service.deleteFile(user.imageUrl)
 
+        s3Service.deleteFile(user.imageUrl ?: return)
         // imageUrl to null
         userRepository.updateUserImageUrlToNull(userId)
     }
