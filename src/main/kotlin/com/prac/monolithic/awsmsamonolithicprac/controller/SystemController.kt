@@ -13,7 +13,9 @@ import java.time.LocalDateTime
 @RestController
 class SystemController(
     @Value("\${cloud.aws.region.static}") private val region: String,
-    @Value("\${cloud.aws.s3.bucket}") private val bucket: String
+    @Value("\${cloud.aws.s3.bucket}") private val bucket: String,
+    @Value("\${cloud.aws.cloud-front.domain-name}") private val cloudFrontDomainName: String,
+    @Value("\${cloud.aws.cloud-front.distribution-id}") private val cloudFrontDistributionId: String,
 ) {
 
     @GetMapping("/health_check")
@@ -25,9 +27,11 @@ class SystemController(
             "ipAddress" to InetAddress.getLocalHost().hostAddress,
             "timestamp" to LocalDateTime.now(),
             "cpuUsage" to getCurrentCpuUsage(),
-            "branch" to "5_1_monolithic_s3",
+            "branch" to "5_2_monolithic_s3_with_cloudfront",
             "aws_region" to region,
-            "s3_bucket" to bucket
+            "s3_bucket" to bucket,
+            "cloud_front_domain_name" to cloudFrontDomainName,
+            "cloud_front_distribution_id" to cloudFrontDistributionId
         )
     )
 

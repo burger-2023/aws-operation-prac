@@ -25,4 +25,7 @@ cloud:
       bucket:
     region:
       static:
+    cloud-front:
+      domain-name:
+      distribution-id:
 

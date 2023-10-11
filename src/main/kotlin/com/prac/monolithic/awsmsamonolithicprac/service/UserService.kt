@@ -22,7 +22,9 @@ class UserService(
         val isExist = userRepository.findByEmail(user.email)
         if (isExist != null) throw UserAlreadyExistsException("User already exist with email: ${user.email}")
 
-        return userRepository.save(user)
+        return userRepository.save(user).apply {
+            imageUrl = s3Service.convertToCloudFrontUrl(imageUrl)
+        }
     }
 
     @Transactional
@@ -31,19 +33,20 @@ class UserService(
         val key = "user/$userId/${image.originalFilename?.replace(" ", "_")}"
 
         // S3에 이미지 업로드
-        val imageUrl = s3Service.uploadFile(key, image.bytes)
+        s3Service.uploadFile(key, image.bytes)
 
         // imageUrl 저장
-        userRepository.updateUserImageUrl(userId, imageUrl)
+        userRepository.updateUserImageUrl(userId, key)
 
-        return imageUrl
+        return key
     }
 
 
     @Transactional(readOnly = true)
     fun findByEmail(credentials: Credentials): User {
-        val user = userRepository.findByEmail(credentials.email)
-            ?: throw UserNotFoundException("User not found with email: ${credentials.email}")
+        val user = userRepository.findByEmail(credentials.email)?.apply {
+            imageUrl = s3Service.convertToCloudFrontUrl(imageUrl)
+        } ?: throw UserNotFoundException("User not found with email: ${credentials.email}")
         if (user.password != credentials.password) throw InvalidCredentialsException("Invalid credentials")
 
         return user
@@ -51,7 +54,9 @@ class UserService(
 
     @Transactional(readOnly = true)
     fun findById(id: Long): User {
-        return userRepository.findById(id).orElseThrow { UserNotFoundException("User not found with id: $id") }
+        return userRepository.findById(id).orElseThrow { UserNotFoundException("User not found with id: $id") }.apply {
+            imageUrl = s3Service.convertToCloudFrontUrl(imageUrl)
+        }
     }
 
     @Transactional
